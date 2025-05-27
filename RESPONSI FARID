@@ -1,0 +1,205 @@
+
+#include<iostream>
+#include<string>
+#include<iomanip>
+
+using namespace std;
+
+class jadwal{
+	private:
+		string user;
+		int pw;
+		int ruang[0];
+		int kpstas[0];
+		string loksi[0];
+		string fasilitas[0];
+		string matakul[0];
+		string dosen[0];
+		string waktu[0];
+		
+		int n;
+		
+		
+	public:
+		bool loginad(string user,int pw);	
+		void inputkls();
+		void editkls();
+		void display();
+		void buatjdwal();
+		bool loginms(string user,int pw);
+		void displayjd();
+};
+
+bool jadwal::loginad(string user, int pw){
+	user = "admin","Admin";
+	pw=1994;
+	cout<<"HALO ADMIN SELAMAT DATANG"<<endl;
+	cout<<"Masukkan username :";
+	cin>>user;
+	cout<<"Masukkan password :";
+	cin>>pw;
+	
+	if(user == "admin" || user == "Admin" && pw==1994){
+		cout<<"Admin Anda Telah masuk "<<endl;
+		return true;
+	}else if(user!="admin" || user != "Admin"){
+		cout<<"Username atau password anda salah "<<endl;
+		return loginad(user,pw);
+	}
+		
+}
+
+void jadwal::inputkls(){
+	int n;
+	ruang[0];
+	kpstas[0];
+	loksi[0];
+	fasilitas[0];
+		
+	cout<<"\nMasukkan jumlah ruangan :";
+	cin>>n;
+	for(int i=0;i<n;i++){
+		cout<<"Masukkan ruang ke "<<i+1<<" :";cin>>ruang[i];
+		cout<<"Masukkan kapasitas ke "<<i+1<<" :";cin>>kpstas[i];
+		cin.ignore();
+		cout<<"Masukkan lokasi ke "<<i+1<<" :";
+		getline(cin,loksi[i]);
+		cout<<"Masukkan fasilitas ke "<<i+1<<" :";
+		getline(cin,fasilitas[i]);
+		
+	}
+	cout<<"\n\n Ruangan yang ready beserta kapasitas nya "<<endl;
+	for(int j=0;j<n;j++){
+		cout<<j+1<<". Ruang :"<<ruang[j]<<endl;
+		cout<<"  -kapasitas :"<<kpstas[j]<<endl;
+		cout<<"  -Lokasi  :"<<loksi[j]<<endl;
+		cout<<"  -Fasilitas :"<<fasilitas[j]<<endl;
+	}
+
+	
+	
+	
+}
+
+void jadwal::editkls(){
+	int n;
+	int pili;
+	
+	cout<<"\n\n Pilih ruangan ke berapa yang ingin di edit "<<endl;
+	for(int j=0;j<n;j++){
+		cout<<j+1<<". Ruang : "<<ruang[j]<<endl;
+		cout<<"  -kapasitas :"<<kpstas[j]<<endl;
+		cout<<"  -Lokasi  :"<<loksi[j]<<endl;
+		cout<<"  -Fasilitas :"<<fasilitas[j]<<endl;
+	}
+		cout<<"99. keluar"<<endl;
+		char edit;
+	do{
+			cout<<"Masukkan pilihan :";
+		cin >>pili;
+		if(pili-1<pili){
+			cout<<"Ruang :";cin>>ruang[pili-1];
+			cout<<"kapasitas :";cin>>kpstas[pili-1];
+			cin.ignore();
+			cout<<"Lokasi :";getline(cin,loksi[pili-1]);
+			cout<<"fasilitas :";getline(cin,fasilitas[pili-1]);
+		}else {
+			cout<<"keluar";
+		}
+			
+	
+	cout<<"\nApakah anda ingin mengedit :(y/n)";
+	cin>>edit;
+	}while(edit=='y'||edit=='Y');
+	
+		
+		display();
+	
+	
+}
+void jadwal::display(){
+	int n;
+	cout<<"\n\n ruangan ready   "<<endl;
+	for(int j=0;j<n;j++){
+		cout<<j+1<<". Ruang : "<<ruang[j]<<endl;
+		cout<<"  -kapasitas :"<<kpstas[j]<<endl;
+		cout<<"  -Lokasi  :"<<loksi[j]<<endl;
+		cout<<"  -Fasilitas :"<<fasilitas[j]<<endl;
+	}
+}
+void jadwal::buatjdwal(){
+	string matakul[0];
+		string dosen[0];
+		string waktu[0];
+	cout<<"====jadwal kuliah===="<<endl;
+	for(int i=0;i<n;i++){
+		cout<<"Matakuliah ke"<<i+1<<" :";cin>>matakul[i];
+		cin.ignore();
+		cout<<"dosen ke"<<i+1<<" :";getline(cin,dosen[i]);
+		cout<<"waktu ke"<<i+1<<" :";getline(cin,waktu[i]);
+	}
+}
+
+bool jadwal::loginms(string user, int pw){
+	user = "mhs","MHS";
+	pw=237;
+	cout<<"HALO mahasiswa SELAMAT DATANG"<<endl;
+	cout<<"Masukkan username :";
+	cin>>user;
+	cout<<"Masukkan password :";
+	cin>>pw;
+	
+	if(user == "mhs" || user == "MHS" && pw==237){
+		cout<<"Mahasiswa Anda Telah masuk "<<endl;
+		return true;
+	}else if(user!="mhs" || user != "MHS"){
+		cout<<"Username atau password anda salah "<<endl;
+		return loginms(user,pw);
+	}
+		
+}
+
+void jadwal::displayjd(){
+		int n;
+	cout<<"\n\nJadwal ready   "<<endl;
+	for(int j=0;j<n;j++){
+		cout<<j+1<<". Matakuliah : "<< matakul[j]<<endl;
+		cout<<"  -dosen :"<<dosen[j]<<endl;
+		cout<<"  -waktu  :"<<waktu[j]<<endl;
+		
+	}
+}
+
+int main(){
+	int pil;
+	string user;
+	int pw;
+	jadwal x;
+	cout<<"Masuk sebagai Admin atau Mahasiswa :"<<endl;
+	cout<<"1. ADMIN"<<endl;
+	cout<<"2. Mahasiswa"<<endl;
+	do{
+		cout<<"\nMasukkan pilihan anda :";
+	cin>>pil;
+	switch(pil){
+		case 1:
+			x.loginad(user,pw);
+			x.inputkls();
+			x.editkls();
+			x.display();
+			break;
+		case 2:
+			x.loginms(user,pw);
+			x.displayjd();
+			break;
+		default:
+			cout<<"program selesai";
+			
+	}
+	}while(pil !=3);
+
+	
+
+	
+	return 0;
+}
